@@ -1,5 +1,5 @@
 import java.util.Scanner;
-/* Unfinished */
+// Unfinished 
 public class GUI {
 
     public static void clearScreen() {
@@ -32,5 +32,14 @@ public class GUI {
         System.out.println("  |   " + leftLeg + " " + rightLeg);
         System.out.println("  |");
         System.out.println("=========");
+    }
+
+        public static String formatTime(int seconds) {
+        int min = seconds / 60;
+        int sec = seconds % 60;
+
+        String minText = (min < 10) ? "0" + min : "" + min;
+        String secText = (sec < 10) ? "0" + sec : "" + sec;
+        return minText + ":" + secText;
     }
 }
