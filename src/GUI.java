@@ -34,12 +34,24 @@ public class GUI {
         System.out.println("=========");
     }
 
-        public static String formatTime(int seconds) {
+    public static String formatTime(int seconds) {
         int min = seconds / 60;
         int sec = seconds % 60;
 
         String minText = (min < 10) ? "0" + min : "" + min;
         String secText = (sec < 10) ? "0" + sec : "" + sec;
         return minText + ":" + secText;
+    }
+
+    public static String attemptsBar(int wrong, int maxWrong) {
+        String bar = "[";
+        for (int i = 1; i <= maxWrong; i++) {
+            if (i <= wrong) {
+                bar += "X";
+            } else {
+                bar += "-";
+            }
+        }
+        return bar + "]";
     }
 }
