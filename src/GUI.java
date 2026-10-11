@@ -54,4 +54,18 @@ public class GUI {
         }
         return bar + "]";
     }
+
+    public static void drawScreen(String category, String maskedWord, String wrongLetters, int wrong, int maxWrong, int seconds, boolean showHint, String hint) {
+        clearScreen();
+        System.out.println("HANGMAN | Theme:" + category);
+        drawHangman(wrong);
+        System.out.println();
+        System.out.println("Word: " + maskedWord);
+        System.out.println("Wrong: " + wrongLetters);
+        System.out.println("Attempts: " + attemptsBar(wrong, maxWrong));
+        System.out.println("Time: " + formatTime(seconds));
+        if (showHint) {
+            System.out.println("Hint: " + hint);
+        }
+    }
 }
