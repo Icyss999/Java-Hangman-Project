@@ -68,4 +68,17 @@ public class GUI {
             System.out.println("Hint: " + hint);
         }
     }
+
+    public static void showWinScreen(String word, int seconds) {
+        clearScreen();
+        System.out.println("You win! The word was " + word);
+        System.out.println("Your time: " + formatTime(seconds));
+    }
+
+    public static void showLoseScreen(String word) {
+        clearScreen();
+        drawHangman(6);
+        System.out.println();
+        System.out.println("Game Over. The word was " + word);
+    }
 }
