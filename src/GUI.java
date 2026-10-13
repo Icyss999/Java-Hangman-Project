@@ -1,5 +1,3 @@
-import java.util.Scanner;
-// Unfinished 
 public class GUI {
 
     public static void clearScreen() {
@@ -55,9 +53,27 @@ public class GUI {
         return bar + "]";
     }
 
+    // Splits a long hint into lines so it fits on the screen
+    public static void printHint(String hint) {
+        final int width = 50;
+        String prefix = "Hint: ";
+        String rest = hint.trim();
+
+        while (rest.length() > width) {
+            int cut = rest.lastIndexOf(' ', width);
+            if (cut <= 0) {
+                cut = width;
+            }
+            System.out.println(prefix + rest.substring(0, cut));
+            prefix = "      ";
+            rest = rest.substring(cut).trim();
+        }
+        System.out.println(prefix + rest);
+    }
+
     public static void drawScreen(String category, String maskedWord, String wrongLetters, int wrong, int maxWrong, int seconds, boolean showHint, String hint) {
         clearScreen();
-        System.out.println("HANGMAN | Theme:" + category);
+        System.out.println("Welcome to Hangman. Your theme is: " + category);
         drawHangman(wrong);
         System.out.println();
         System.out.println("Word: " + maskedWord);
@@ -65,7 +81,7 @@ public class GUI {
         System.out.println("Attempts: " + attemptsBar(wrong, maxWrong));
         System.out.println("Time: " + formatTime(seconds));
         if (showHint) {
-            System.out.println("Hint: " + hint);
+            printHint(hint);
         }
     }
 
