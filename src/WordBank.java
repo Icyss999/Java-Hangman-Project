@@ -266,8 +266,8 @@ public class WordBank {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int category = askUserForCategory(scanner);
-        int wordIndex = pickRandomWordIndex();
+        int category = scanner.nextInt();
+        int wordIndex = scanner.nextInt();
         String word = getWord(category, wordIndex);
 
         System.out.println("Category: " + getCategoryName(category));
