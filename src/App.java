@@ -1,5 +1,7 @@
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class App {
     static final int MAX_WRONG = 6;
     static final int HINT_EVERY = 2;
@@ -113,12 +115,10 @@ public class App {
         String message = "";
         boolean won = false;
 
-
         TimeTracker timer = new TimeTracker();
         timer.start();
 
         while (wrong < MAX_WRONG && !won) {
-
 
             GUI.drawScreen(categoryName,
                     buildMasked(word, guessed),
@@ -181,6 +181,25 @@ public class App {
         return won;
     }
 
+    public static boolean isDisplayLeaderboard(Scanner scanner, boolean displaying) {
+        System.out.print("Enter 0 to exit the leaderboard: ");
+        int choice;
+        while (true) {
+            try {
+                choice = scanner.nextInt();
+                if (choice == 0) return !displaying;
+                else {
+                System.out.print("Nah this ain't number 0, please try again: ");
+             }
+            } catch (InputMismatchException e) {
+                System.out.print("Hmm this doesn't like a number to me, try again: ");
+                scanner.nextLine();
+            }
+           
+        }
+
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -194,18 +213,22 @@ public class App {
                     boolean won = playRound(scanner);
 
                     if (won) {
-                        playing = false;                 // back to the main menu
+                        playing = false; // back to the main menu
                     } else {
                         System.out.println();
                         playing = askYesNo(scanner, "Retry? (y = retry, n = exit): ");
                         if (!playing) {
-                            running = false;             // exit the program
+                            running = false; // exit the program
                         }
                     }
                 }
             } else if (choice == 2) {
-                System.out.println();
-                Leaderboard.displayPlayer();
+                boolean displaying = true;
+                while(displaying){
+                    System.out.println();
+                    Leaderboard.displayPlayer();
+                    displaying = isDisplayLeaderboard(scanner, displaying);
+                }   
             } else {
                 running = false;
             }
